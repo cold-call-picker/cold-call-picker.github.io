@@ -15,13 +15,15 @@
 			--accent-2: #22d3ee;
 			--ring: rgba(96,165,250,.35);
 		}
+		html { background-color: var(--bg); }
 		* { box-sizing: border-box; }
 		html, body { height: 100%; }
 		body {
 			margin: 0;
 			font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-			background: radial-gradient(1200px 800px at 50% -20%, #1f2937 0%, var(--bg) 50%);
+			background: radial-gradient(1200px 800px at 50% -20%, #1f2937 0%, var(--bg) 50%), var(--bg);
 			color: var(--text);
+			min-height: 100dvh;
 		}
 
 		.container {
@@ -171,9 +173,14 @@
 				<button id="openClass" class="ghost">Create / Edit Class</button>
 				<button id="resetPasses" title="Clear all passes for today" class="ghost">Reset Passes</button>
 				<button id="exportData" class="ghost" title="Download backup JSON">Export</button>
-				<label class="ghost" style="padding:10px 14px; border-radius:12px; border:1px dashed #334155; cursor:pointer;">
+<!-- 				<label class="ghost" style="padding:10px 14px; border-radius:12px; border:1px dashed #334155; cursor:pointer;">
 					<input id="importFile" type="file" accept="application/json" hidden />Import
 				</label>
+ -->			
+ 				<button id="importBtn" class="ghost" title="Import from JSON">
+ 					Import
+ 				</button>
+ 				<input id="importFile" type="file" accept="application/json" hidden>
 			</div>
 		</header>
 
@@ -283,6 +290,9 @@
 		const resetPassesBtn = document.getElementById('resetPasses');
 		const exportBtn = document.getElementById('exportData');
 		const importFile = document.getElementById('importFile');
+		const importBtn  = document.getElementById('importBtn');
+
+		importBtn.addEventListener('click', () => importFile.click());
 
 		// ===== Roster Render =====
 		function renderRoster() {
